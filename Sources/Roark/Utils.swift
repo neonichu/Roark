@@ -2,6 +2,7 @@ import Darwin.C
 
 private let RTLD_DEFAULT = UnsafeMutablePointer<Void>(bitPattern: -2)
 
+// Inspired by: http://stackoverflow.com/a/30740730
 func CFunction<T>(name: String, _ type: T.Type) -> T {
   let sym = dlsym(RTLD_DEFAULT, name)
   return unsafeBitCast(sym, type.self)

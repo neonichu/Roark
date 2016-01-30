@@ -1,11 +1,13 @@
+import Foundation
 import ObjectiveC.runtime
 
-public class Project: NSObject {
-  let OBJC_CLASS = (objc_getClass("PBXProject") as? NSObjectProtocol) ?? undefined()
-  let obj: NSObject
+public class Project: NSObject, Named {
+  private let OBJC_CLASS = (objc_getClass("PBXProject") as? NSObjectProtocol) ?? undefined()
+  public let obj: NSObject
 
-  public var name: String {
-    return (obj.valueForKey("name") as? String) ?? undefined()
+  public var targets: [Target] {
+    let targets = (obj.valueForKey("targets") as? NSArray) ?? undefined()
+    return targets.map { Target(obj: ($0 as? NSObject) ?? undefined()) }
   }
 
   public init(file: String) {
