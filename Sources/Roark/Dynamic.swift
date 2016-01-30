@@ -1,7 +1,16 @@
 import ObjectiveC.runtime
 
 public protocol Dynamic {
+  var OBJC_CLASS: NSObjectProtocol { get }
   var obj: NSObject { get }
+
+  var `class`: AnyClass { get }
+}
+
+public extension Dynamic {
+  public var `class`: AnyClass {
+    return (OBJC_CLASS as? AnyClass) ?? undefined()
+  }
 }
 
 public protocol Named: Dynamic {

@@ -1,4 +1,4 @@
-import Darwin.C
+import ObjectiveC.runtime
 
 private let RTLD_DEFAULT = UnsafeMutablePointer<Void>(bitPattern: -2)
 
@@ -6,6 +6,13 @@ private let RTLD_DEFAULT = UnsafeMutablePointer<Void>(bitPattern: -2)
 func CFunction<T>(name: String, _ type: T.Type) -> T {
   let sym = dlsym(RTLD_DEFAULT, name)
   return unsafeBitCast(sym, type.self)
+}
+
+// Inspired by: http://stackoverflow.com/a/34183351
+func ObjCMethod<T>(`class`: AnyClass, _ name: String, _ type: T.Type) -> T {
+  let method = class_getInstanceMethod(`class`, Selector(name))
+  let imp = method_getImplementation(method)
+  return unsafeBitCast(imp, type.self)
 }
 
 func silence_stderr(silenced: () -> ()) {
