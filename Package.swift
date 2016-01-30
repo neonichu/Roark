@@ -7,5 +7,8 @@ let package = Package(
   ],
   dependencies: [
     .Package(url: "https://github.com/neonichu/Chores", majorVersion: 0),
+  ],
+  testDependencies: [
+    .Package(url: "https://github.com/neonichu/spectre-build.git", majorVersion: 0),
   ]
 )

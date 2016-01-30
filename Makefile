@@ -1,6 +1,6 @@
 BUILD_DIR=./.build/debug
 
-.PHONY: all clean lib
+.PHONY: all clean lib test
 
 all: lib
 	$(BUILD_DIR)/test `pwd`/Tests/Fixtures/Blog.xcodeproj
@@ -10,3 +10,6 @@ lib:
 
 clean:
 	swift build --clean
+
+test:
+	$(BUILD_DIR)/spectre-build
