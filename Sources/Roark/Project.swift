@@ -26,4 +26,11 @@ public class Project: NSObject, Named {
         "writeToFileSystemProjectFile:userFile:checkNeedsRevert:", writeToFileSystemType.self)
     return writeToFileSystem(true, false, true)
   }
+
+  /* Missing:
+    + (BOOL) isProjectWrapperExtension:(NSString *)extension;
+    - (id<XCConfigurationList>) buildConfigurationList;
+
+    Implementation of PBXContainer
+  */
 }
