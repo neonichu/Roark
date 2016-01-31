@@ -11,5 +11,5 @@ lib:
 clean:
 	swift build --clean
 
-test:
+test: lib
 	$(BUILD_DIR)/spectre-build
