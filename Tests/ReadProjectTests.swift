@@ -31,5 +31,11 @@ func describeReadProject() {
       let target = project.targetNamed("BlogTests")
       try expect(target.name) == "BlogTests"
     }
+
+    $0.it("can retrieve the source code build phase") {
+      let target = project.targetNamed("Blog")
+      let buildPhase = target.defaultSourceCodeBuildPhase
+      try expect("\(buildPhase.obj.dynamicType)") == "PBXSourcesBuildPhase"
+    }
   }
 }

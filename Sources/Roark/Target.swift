@@ -14,4 +14,29 @@ public class Target: NSObject, Named {
     assert(targetTypes.contains(String(obj.dynamicType)))
     self.obj = obj
   }
+
+  private func buildPhaseForKey(key: String) -> BuildPhase {
+    let result = (obj.valueForKey(key) as? NSObject) ?? undefined()
+    return BuildPhase(obj: result)
+  }
+
+  public var defaultFrameworksBuildPhase: BuildPhase {
+    return buildPhaseForKey(__FUNCTION__)
+  }
+
+  public var defaultHeaderBuildPhase: BuildPhase {
+    return buildPhaseForKey(__FUNCTION__)
+  }
+
+  public var defaultLinkBuildPhase: BuildPhase {
+    return buildPhaseForKey(__FUNCTION__)
+  }
+
+  public var defaultResourceBuildPhase: BuildPhase {
+    return buildPhaseForKey(__FUNCTION__)
+  }
+
+  public var defaultSourceCodeBuildPhase: BuildPhase {
+    return buildPhaseForKey(__FUNCTION__)
+  }
 }
