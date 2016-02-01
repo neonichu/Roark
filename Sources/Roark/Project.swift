@@ -15,6 +15,10 @@ public class Project: NSObject, Named {
     obj = (result.takeRetainedValue() as? NSObject) ?? undefined()
   }
 
+  public func close() {
+    obj.performSelector(Selector("close"))
+  }
+
   public func targetNamed(name: String) -> Target {
     let result = obj.performSelector(Selector("targetNamed:"), withObject: name)
     return Target(obj: (result.takeRetainedValue() as? NSObject) ?? undefined())
