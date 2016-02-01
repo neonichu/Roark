@@ -1,2 +1,3 @@
 describeReadProject()
 describeWriteProject()
+describeTemplates()

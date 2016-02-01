@@ -17,7 +17,8 @@ public func InitializeXcode() {
   load_xcode_framework("Frameworks/IBFoundation.framework/IBFoundation")
   load_xcode_framework("Frameworks/IBAutolayoutFoundation.framework/IBAutolayoutFoundation")
   load_xcode_framework("Frameworks/IDEFoundation.framework/IDEFoundation")
-  load_xcode_framework("PlugIns/Xcode3Core.ideplugin/Contents/MacOS/Xcode3Core")
+  //load_xcode_framework("PlugIns/Xcode3Core.ideplugin/Contents/MacOS/Xcode3Core")
+  load_xcode_framework("OtherFrameworks/DevToolsCore.framework/DevToolsCore")
 
   silence_stderr {
   	typealias IDEInitializeType = @convention(c) (Int, UnsafePointer<Void>) -> ()
