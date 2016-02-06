@@ -4,7 +4,9 @@ import Foundation
 private func load_xcode_framework(path: String) {
   let result = >["xcode-select", "-p"]
   if let xcodePath = result.stdout.lines.first {
-    if dlopen("\(xcodePath)/../\(path)", RTLD_NOW) == nil {
+    let path = "\(xcodePath)/../\(path)"
+    if !NSFileManager.defaultManager().fileExistsAtPath(path) { return }
+    if dlopen(path, RTLD_NOW) == nil {
       fatalError(String.fromCString(dlerror()) ?? "dlopen() failed")
     }
   }
@@ -12,6 +14,8 @@ private func load_xcode_framework(path: String) {
 
 public func InitializeXcode() {
   load_xcode_framework("SharedFrameworks/DVTFoundation.framework/DVTFoundation")
+  load_xcode_framework("SharedFrameworks/DVTServices.framework/DVTServices")
+  load_xcode_framework("SharedFrameworks/DVTPortal.framework/DVTPortal")
   load_xcode_framework("SharedFrameworks/DVTSourceControl.framework/DVTSourceControl")
   //load_xcode_framework("SharedFrameworks/CSServiceClient.framework/CSServiceClient")
   load_xcode_framework("Frameworks/IBFoundation.framework/IBFoundation")
