@@ -15,6 +15,12 @@ func ObjCMethod<T>(`class`: AnyClass, _ name: String, _ type: T.Type) -> T {
   return unsafeBitCast(imp, type.self)
 }
 
+func ObjCClassMethod<T>(`class`: AnyClass, _ name: String, _ type: T.Type) -> T {
+  let method = class_getClassMethod(`class`, Selector(name))
+  let imp = method_getImplementation(method)
+  return unsafeBitCast(imp, type.self)
+}
+
 func silence_stderr(silenced: () -> ()) {
   let orig_stderr = dup(fileno(stderr))
   freopen("/dev/null", "w", stderr)

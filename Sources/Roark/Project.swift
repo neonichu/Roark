@@ -2,7 +2,8 @@ import Foundation
 import ObjectiveC.runtime
 
 public class Project: NSObject, Named {
-  public let OBJC_CLASS = (objc_getClass("PBXProject") as? NSObjectProtocol) ?? undefined()
+  private static let sOBJC_CLASS = (objc_getClass("PBXProject") as? NSObjectProtocol) ?? undefined()
+  public let OBJC_CLASS = Project.sOBJC_CLASS
   public let obj: NSObject
 
   public var targets: [Target] {
@@ -31,8 +32,16 @@ public class Project: NSObject, Named {
     return writeToFileSystem(true, false, true)
   }
 
+  public static func isProjectWrapperExtension(extension: String) -> Bool {
+    typealias isProjectWrapperExtensionType = @convention(c) (String) -> Bool
+    let `class`: AnyClass = (sOBJC_CLASS as? AnyClass) ?? undefined()
+    let isProjectWrapperExtension = ObjCClassMethod(`class`, __FUNCTION__ + ":",
+        isProjectWrapperExtensionType.self)
+    print(`extension`)
+    return isProjectWrapperExtension(`extension`)
+  }
+
   /* Missing:
-    + (BOOL) isProjectWrapperExtension:(NSString *)extension;
     - (id<XCConfigurationList>) buildConfigurationList;
 
     Implementation of PBXContainer

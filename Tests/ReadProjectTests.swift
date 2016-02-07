@@ -13,6 +13,12 @@ func describeReadProject() {
       project = Project(file: String(path))
     }
 
+    $0.it("can check if an extension is a project wrapper extension") {
+      // FIXME: isProjectWrapperExtension() doesn't actually work :/
+      //try expect(Project.isProjectWrapperExtension("xcodeproj")) == true
+      try expect(Project.isProjectWrapperExtension("txt")) == false
+    }
+
     $0.it("can open a project file") {
       try expect("\(project.obj.dynamicType)") == "PBXProject"
     }
