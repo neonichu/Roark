@@ -1,5 +1,7 @@
 # Roark
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 :warning: WIP
 
 A Swift library for interacting with Xcode projects.
